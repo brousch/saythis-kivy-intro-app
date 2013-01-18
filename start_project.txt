@@ -1,0 +1,14 @@
+mkdir MyProject
+cd MyProject
+mkdir myproject # Python part of project
+cd myproject
+* Create you Python and Kivy project *
+python main.py
+cd ..
+git clone https://github.com/kivy/python-for-android.git
+cd python-for-android
+./distribute.sh -m "kivy pyjnius" # openssh pil ...
+cd dist/default
+./build.py --package com.example.myproject --name "My Project" --version 1.0 --dir ../../../myproject debug
+cd bin
+adb push "My Project-1.0-debug.apk"
