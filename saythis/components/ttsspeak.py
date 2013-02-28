@@ -17,6 +17,7 @@
 
 
 import subprocess
+from time import sleep
 from kivy.utils import platform
 from components import whereis_exe
 
@@ -29,7 +30,9 @@ def ttsSpeak_android(message):
     TextToSpeech = autoclass('android.speech.tts.TextToSpeech')
     tts = TextToSpeech(PythonActivity.mActivity, None)
     tts.setLanguage(Locale.US)
-    tts.speak(message, TextToSpeech.QUEUE_FLUSH, None)
+    while tts.speak(message, TextToSpeech.QUEUE_FLUSH, None) == -1:
+        # -1 indicates error, so sleep and try again
+        sleep(0.1)
 
 def ttsSpeak_espeak(message):
     ''' Speaks the message using espeak '''
