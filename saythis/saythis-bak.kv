@@ -1,0 +1,55 @@
+#:kivy 1.5.1
+
+<SayThis>:
+    font_size: '15sp'
+    padding: (root.width * 0.01, root.height * 0.01)
+    spacing: (root.width * 0.05, root.height * 0.05)
+    canvas.before:
+		Rectangle:
+		    source: 'images/background.png'
+		    pos: self.pos
+		    size: self.size
+
+    FloatLayout:
+        id: body
+        pos: (root.center_x - (self.width / 2)), (root.center_y - (self.height / 2))
+        size_hint: None, None
+        width: root.width - root.spacing[0]
+        height: root.height - root.spacing[1]
+
+    Label:
+        id: saywhat_label
+        text: 'Say what?'
+        color: (1,1,1,1)
+        font_size: root.font_size
+        pos: body.pos[0], (body.center_y - (self.height / 2))
+        size_hint: None, None
+        width: self.texture_size[0] + root.spacing[0]
+        height: saywhat_text.height
+        canvas.before:
+            Color:
+                rgba: (0.25, 0.25, 0.25, 1)
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        
+    TextInput:
+        id: saywhat_text
+        text: 'Hello, world!'
+        font_size: root.font_size
+        multiline: False
+        pos: (body.pos[0] + (saywhat_label.width + root.padding[0])), (body.center_y - (self.height / 2))
+        size_hint: None, None
+        width: body.width - (saywhat_label.width + root.padding[0])
+        height: self.line_height + (2 * root.padding[1])
+                
+    Button:
+        id: sayit_button
+        text: 'Say it!'
+        font_size: root.font_size
+        pos: (body.center_x - (self.width / 2)), (saywhat_text.pos[1] - (self.height + root.padding[1]))
+        size_hint: None, None
+        width: self.texture_size[0] + (2 * root.spacing[0])
+        height: self.texture_size[1] + (2 * root.padding[1])
+        on_press: root.say_something(saywhat_text.text)
+ 

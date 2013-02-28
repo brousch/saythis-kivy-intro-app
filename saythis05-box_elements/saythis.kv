@@ -1,0 +1,17 @@
+#:kivy 1.5.1
+
+<SayThis>:
+    canvas:
+		Rectangle:
+		    source: 'images/background.png'
+            pos: self.pos
+            size: self.size
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: 'Say This!'
+        TextInput:
+            text: 'Hello, world!'
+            multiline: True
+        Button:
+            text: 'Say it!'

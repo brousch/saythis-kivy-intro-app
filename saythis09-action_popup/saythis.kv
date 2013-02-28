@@ -5,30 +5,29 @@
     canvas:
 		Rectangle:
 		    source: 'images/background.png'
-		    pos: self.pos
-		    size: self.size
-
+            pos: self.pos
+            size: self.size
+            
     BoxLayout:
         orientation: 'vertical'
-        padding: root.width*0.05
-        spacing: root.height*0.05
-    
+        padding: root.width*0.05    # outside of elements 
+        spacing: root.height*0.05   # between elements
+
         Label:
             text: 'Say This!'
             font_size: '45sp'
             size_hint: 1, None
             size: self.texture_size
-        
+            
         TextInput:
             id: saywhat_text
             text: 'Hello, world!'
             font_size: root.font_size
             multiline: True
-                
+            
         Button:
             id: sayit_button
             text: 'Say it!'
             font_size: '30sp'
             size_hint: 1, None
             on_press: root.say_something(saywhat_text.text)
- 
