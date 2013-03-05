@@ -2,7 +2,7 @@ mkdir MyProject
 cd MyProject
 mkdir myproject # Python part of project
 cd myproject
-* Create you Python and Kivy project *
+* Create your Python and Kivy project *
 python main.py
 cd ..
 git clone https://github.com/kivy/python-for-android.git

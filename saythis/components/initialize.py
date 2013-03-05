@@ -10,6 +10,7 @@ platform = platform()
 def initialize_android():
     from jnius import autoclass
     PythonActivity = autoclass('org.renpy.android.PythonActivity')
+    # Set the volume control to Media Volume
     AudioManager = autoclass('android.media.AudioManager')
     PythonActivity.mActivity.setVolumeControlStream(AudioManager.STREAM_MUSIC)
 
