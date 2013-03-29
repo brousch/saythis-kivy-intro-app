@@ -1,34 +1,43 @@
 #:kivy 1.5.1
-
 <SayThis>:
     font_size: '15sp'
     canvas:
-		Rectangle:
-		    source: 'images/background.png'
-		    pos: self.pos
-		    size: self.size
-
+        Rectangle:
+            source: 'images/background.png'
+            pos: self.pos
+            size: self.size
+    saywhat_text: saywhat_text
     BoxLayout:
+        id: main_layout
         orientation: 'vertical'
-        padding: root.width*0.05
-        spacing: root.height*0.05
-    
+        padding: root.width*0.02
         Label:
             text: 'Say This!'
             font_size: '45sp'
             size_hint: 1, None
-            size: self.texture_size
-        
+            size: self.texture_size[0], (self.texture_size[1] + (2*main_layout.padding))
         TextInput:
             id: saywhat_text
             text: 'Hello, world!'
             font_size: root.font_size
             multiline: True
-                
-        Button:
-            id: sayit_button
-            text: 'Say it!'
+        BoxLayout:
+            id: button_box
+            orientation: 'horizontal'
             font_size: '30sp'
             size_hint: 1, None
-            on_press: root.say_something(saywhat_text.text)
- 
+            size: 0, sayit_button.size[1]
+            Button:
+                id: sayit_button
+                text: 'Say it!'
+                font_size: button_box.font_size
+                size_hint: 1, None
+                size: self.texture_size[0], (self.texture_size[1] + (2*main_layout.padding))
+                on_press: root.say_something(saywhat_text.text)
+            Button:
+                id: clear_button
+                text: 'Clear'
+                font_size: button_box.font_size
+                size_hint: 1, None
+                size: self.texture_size[0], (self.texture_size[1] + (2*main_layout.padding))
+                on_press: root.clear()

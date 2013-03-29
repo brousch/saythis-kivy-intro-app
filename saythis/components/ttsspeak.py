@@ -30,10 +30,13 @@ def ttsSpeak_android(message):
     TextToSpeech = autoclass('android.speech.tts.TextToSpeech')
     tts = TextToSpeech(PythonActivity.mActivity, None)
     tts.setLanguage(Locale.US)
-    while tts.speak(message, TextToSpeech.QUEUE_FLUSH, None) == -1:
-        # -1 indicates error, so sleep and try again
+    retries = 0
+    while retries < 10 and \
+          tts.speak(message.encode('utf-8'), TextToSpeech.QUEUE_FLUSH, None) == -1:
+        # -1 indicates error. Let's wait and then try again
         sleep(0.1)
-
+        retries += 1
+        
 def ttsSpeak_espeak(message):
     ''' Speaks the message using espeak '''
     subprocess.call(["espeak", message])
